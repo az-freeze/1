@@ -1,0 +1,70 @@
+name: Generate AZ Freeze Site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Create site files
+        run: |
+          mkdir -p dist
+
+          cat <<EOF > dist/index.html
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AZ Freeze Appliance Repair</title>
+</head>
+<body style="font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6">
+  <h1>AZ Freeze Appliance Repair</h1>
+
+  <p><b>Fast appliance repair in East Valley, Arizona</b></p>
+
+  <h2>Service Area</h2>
+  <p>Tempe, Mesa, Chandler, Gilbert, Phoenix</p>
+
+  <h2>We Repair</h2>
+  <ul>
+    <li>Washers & Dryers</li>
+    <li>Refrigerators</li>
+    <li>Dishwashers</li>
+    <li>Ovens & Stoves</li>
+  </ul>
+
+  <h2>Brands</h2>
+  <p>Samsung, LG, Whirlpool, GE, Frigidaire, Bosch, Viking</p>
+
+  <h2>Call Now</h2>
+  <p><a href="tel:+16024997053">+1 602-499-7053</a></p>
+</body>
+</html>
+EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
