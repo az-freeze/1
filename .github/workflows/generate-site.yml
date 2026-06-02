@@ -15,14 +15,13 @@ jobs:
         run: |
           mkdir -p dist
 
-          cat > dist/index.html << 'EOF'
-<!doctype html>
+          echo "<!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset='utf-8'>
   <title>AZ Freeze Appliance Repair</title>
 </head>
-<body style="font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6">
+<body style='font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6'>
   <h1>AZ Freeze Appliance Repair</h1>
 
   <p>Fast appliance repair in Tempe, Mesa, Chandler, Gilbert</p>
@@ -39,10 +38,9 @@ jobs:
   <p>Samsung, LG, Whirlpool, GE, Frigidaire, Bosch, Viking</p>
 
   <h2>Call Now</h2>
-  <p><a href="tel:+16024997053">+1 602-499-7053</a></p>
+  <p><a href='tel:+16024997053'>+1 602-499-7053</a></p>
 </body>
-</html>
-EOF
+</html>" > dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
