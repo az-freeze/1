@@ -11,11 +11,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create site files
+      - name: Create site
         run: |
           mkdir -p dist
 
-          cat <<EOF > dist/index.html
+          cat > dist/index.html << 'EOF'
 <!doctype html>
 <html>
 <head>
@@ -25,10 +25,7 @@ jobs:
 <body style="font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6">
   <h1>AZ Freeze Appliance Repair</h1>
 
-  <p><b>Fast appliance repair in East Valley, Arizona</b></p>
-
-  <h2>Service Area</h2>
-  <p>Tempe, Mesa, Chandler, Gilbert, Phoenix</p>
+  <p>Fast appliance repair in Tempe, Mesa, Chandler, Gilbert</p>
 
   <h2>We Repair</h2>
   <ul>
@@ -60,11 +57,6 @@ EOF
       pages: write
       id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
