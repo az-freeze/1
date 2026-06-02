@@ -11,36 +11,31 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create site
+      - name: Create site file
         run: |
           mkdir -p dist
-
-          echo "<!doctype html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <title>AZ Freeze Appliance Repair</title>
-</head>
-<body style='font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6'>
-  <h1>AZ Freeze Appliance Repair</h1>
-
-  <p>Fast appliance repair in Tempe, Mesa, Chandler, Gilbert</p>
-
-  <h2>We Repair</h2>
-  <ul>
-    <li>Washers & Dryers</li>
-    <li>Refrigerators</li>
-    <li>Dishwashers</li>
-    <li>Ovens & Stoves</li>
-  </ul>
-
-  <h2>Brands</h2>
-  <p>Samsung, LG, Whirlpool, GE, Frigidaire, Bosch, Viking</p>
-
-  <h2>Call Now</h2>
-  <p><a href='tel:+16024997053'>+1 602-499-7053</a></p>
-</body>
-</html>" > dist/index.html
+          printf "%s\n" "<!doctype html>" \
+          "<html>" \
+          "<head>" \
+          "  <meta charset='utf-8'>" \
+          "  <title>AZ Freeze Appliance Repair</title>" \
+          "</head>" \
+          "<body style='font-family:Arial;max-width:900px;margin:40px auto;line-height:1.6'>" \
+          "  <h1>AZ Freeze Appliance Repair</h1>" \
+          "  <p>Fast appliance repair in Tempe, Mesa, Chandler, Gilbert</p>" \
+          "  <h2>We Repair</h2>" \
+          "  <ul>" \
+          "    <li>Washers & Dryers</li>" \
+          "    <li>Refrigerators</li>" \
+          "    <li>Dishwashers</li>" \
+          "    <li>Ovens & Stoves</li>" \
+          "  </ul>" \
+          "  <h2>Brands</h2>" \
+          "  <p>Samsung, LG, Whirlpool, GE, Frigidaire, Bosch, Viking</p>" \
+          "  <h2>Call Now</h2>" \
+          "  <p><a href='tel:+16024997053'>+1 602-499-7053</a></p>" \
+          "</body>" \
+          "</html>" > dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
