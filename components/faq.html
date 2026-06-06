@@ -1,0 +1,32 @@
+<section>
+  <div class="container">
+    <div class="section-title">Frequently Asked Questions</div>
+    <div class="faq" id="component-faq"></div>
+    <div style="margin-top:12px"><a class="btn btn-primary" id="component-faq-contact" href="tel:+16024997053">Speak With A Technician</a></div>
+  </div>
+
+  <script>
+    (function(){
+      // Component expects a global variable 'PAGE_FAQ' or data attribute on this script tag
+      var faqData = window.PAGE_FAQ || [];
+      var container = document.getElementById('component-faq');
+      if(!container) return;
+      faqData.forEach(function(item){
+        var div = document.createElement('div');
+        div.className = 'faq-item';
+        var q = document.createElement('div'); q.className='faq-question'; q.textContent = item.question;
+        var a = document.createElement('div'); a.className='faq-answer'; a.textContent = item.answer; a.style.display='none';
+        div.appendChild(q); div.appendChild(a); container.appendChild(div);
+        q.tabIndex=0; q.setAttribute('role','button');
+        q.addEventListener('click',function(){ a.style.display = a.style.display === 'none' ? 'block' : 'none'; });
+        q.addEventListener('keypress',function(e){ if(e.key==='Enter'||e.key===' ') q.click(); });
+      });
+
+      // If structured data is provided on window.PAGE_FAQ_JSONLD, inject it
+      if(window.PAGE_FAQ_JSONLD){
+        var s = document.createElement('script'); s.type='application/ld+json'; s.text = JSON.stringify(window.PAGE_FAQ_JSONLD);
+        document.currentScript.parentNode.appendChild(s);
+      }
+    })();
+  </script>
+</section>
