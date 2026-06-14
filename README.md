@@ -1,3 +1,4 @@
+# github.io
 # Arizona Freeze - Static Website for GitHub Pages
 
 This is a complete static HTML website for Arizona Freeze appliance repair service, optimized for GitHub Pages hosting.
